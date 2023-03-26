@@ -26,6 +26,7 @@ public class BinaryTree {
 	     printTree(root.leftNode);
 		 printTree(root.rightNode);
 	 }
+	// here we took input recursively
 	 public BinaryTreeNode<Integer> takeInput() {
              Scanner s=new Scanner(System.in);
           
