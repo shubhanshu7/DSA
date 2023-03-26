@@ -11,6 +11,7 @@ public class BinaryTree {
 			this.data=data;
 		}	
 	}
+	
 	 public void printTree(BinaryTreeNode<Integer> root) {
 		 if(root==null) {
 			 return;
@@ -26,27 +27,32 @@ public class BinaryTree {
 	     printTree(root.leftNode);
 		 printTree(root.rightNode);
 	 }
-	// here we took input recursively
-	 public BinaryTreeNode<Integer> takeInput() {
-             Scanner s=new Scanner(System.in);
-          
-             System.out.println("enter root data");
-             int rootData=s.nextInt();
-             if(rootData==-1) {
-            	 return null;
-             }
- 	        BinaryTreeNode<Integer> root=new BinaryTreeNode<Integer>(rootData);
- 	        BinaryTreeNode<Integer> left=takeInput();
- 	        BinaryTreeNode<Integer> right=takeInput();
- 	        root.leftNode=left;
- 	        root.rightNode=right;
- 	        return root;
+	// this function takes more organized input for binary tree
+	 public BinaryTreeNode<Integer> takeInputBetter(boolean isRoot,int data,boolean isLeft) {
+		 if(isRoot) {
+	         System.out.println("enter root data");
+		 }else if(isLeft) {
+			 System.out.println("enter left child of "+data);
+		 }else {
+			 System.out.println("enter right child of "+data);
+		 }
+         Scanner s=new Scanner(System.in);
+      
+         int rootData=s.nextInt();
+         if(rootData==-1) {
+        	 return null;
+         }
+	        BinaryTreeNode<Integer> root=new BinaryTreeNode<Integer>(rootData);
+	        BinaryTreeNode<Integer> left=takeInputBetter(false,rootData,true);
+	        BinaryTreeNode<Integer> right=takeInputBetter(false,rootData,false);
+	        root.leftNode=left;
+	        root.rightNode=right;
+	        return root;
 
-	 }
-	 
+ }
 	public static void main(String[] args) {
 		BinaryTree b=new BinaryTree();
-		BinaryTreeNode<Integer> root=b.takeInput();
+		BinaryTreeNode<Integer> root=b.takeInputBetter(true,0,false);
         b.printTree(root);
         
 	}
